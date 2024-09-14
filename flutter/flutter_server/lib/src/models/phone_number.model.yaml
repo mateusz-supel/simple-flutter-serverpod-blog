@@ -1,0 +1,12 @@
+class: PhoneNumber
+
+fields:
+
+  ### Country code character before the country code number, for example "+"
+  countryCodeChar: String
+
+  ### Phone country code of the person
+  countryCode: int
+
+  ### Phone number of the person
+  number: int

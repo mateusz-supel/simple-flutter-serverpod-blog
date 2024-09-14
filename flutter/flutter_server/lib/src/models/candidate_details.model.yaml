@@ -1,0 +1,22 @@
+class: CandidateDetails
+
+table: candidate_details
+
+fields:
+  ### Name of the person
+  name: String
+
+  ### Surname of the person
+  surname: String
+
+  ### Location of the person, for example: London
+  location: String
+
+  ### Phone number
+  phoneNumber: PhoneNumber
+
+  ### Email address of the person
+  email: String
+
+  ### LinkedInUrl
+  linkedInUrl: String
