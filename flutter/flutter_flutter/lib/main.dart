@@ -40,13 +40,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class MyHomePageState extends State<MyHomePage> {
-  // These fields hold the last result or error message that we've received from
-  // the server or null if no result exists yet.
-  String? _resultMessage;
-  String? _errorMessage;
-
-  final _textEditingController = TextEditingController();
-
   Widget buildRow(BuildContext context, List<String> items) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -58,20 +51,35 @@ class MyHomePageState extends State<MyHomePage> {
   NavigationRailLabelType labelType = NavigationRailLabelType.all;
   double groupAlignment = -1.0;
 
+  Candidate? _candidate;
+  Exception? _connectionException;
+
+  Future<void> _loadCandidate() async {
+    try {
+      final candidate = await client.candidate.getCandidateById(1);
+      setState(() {
+        _candidate = candidate;
+      });
+    } catch (e) {
+      _connectionFailed(e);
+    }
+  }
+
+  void _connectionFailed(dynamic exception) {
+    setState(() {
+      _candidate = null;
+      _connectionException = exception;
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _loadCandidate();
+  }
+
   @override
   Widget build(BuildContext context) {
-    final Candidate candidate = Candidate(
-        details: CandidateDetails(
-            name: "Mateusz",
-            surname: "Supeł",
-            location: "Wrocław / Remote",
-            phoneNumber: PhoneNumber(
-                countryCodeChar: "+", countryCode: 48, number: 508303618),
-            email: "mateusz.supel@gmail.com",
-            linkedInUrl: "https://www.linkedin.com/in/mateusz-supel/"));
-
-    print(candidate.toJson());
-
     return LayoutBuilder(
       builder: (context, constraints) {
         return Scaffold(
