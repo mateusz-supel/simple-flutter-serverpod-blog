@@ -1,6 +1,7 @@
+candidate:
+  - create:
+  - delete:
+  - getCandidateById:
+  - getAllCandidates:
 example:
   - hello:
-getAllCandidates:
-  - getAllCandidates:
-getCandidateById:
-  - getCandidateById:

@@ -15,6 +15,42 @@ import 'package:flutter_client/src/protocol/candidate.modal.dart' as _i3;
 import 'protocol.dart' as _i4;
 
 /// {@category Endpoint}
+class EndpointCandidate extends _i1.EndpointRef {
+  EndpointCandidate(_i1.EndpointCaller caller) : super(caller);
+
+  @override
+  String get name => 'candidate';
+
+  _i2.Future<_i3.Candidate> create(_i3.Candidate candidate) =>
+      caller.callServerEndpoint<_i3.Candidate>(
+        'candidate',
+        'create',
+        {'candidate': candidate},
+      );
+
+  _i2.Future<void> delete(_i3.Candidate candidate) =>
+      caller.callServerEndpoint<void>(
+        'candidate',
+        'delete',
+        {'candidate': candidate},
+      );
+
+  _i2.Future<_i3.Candidate?> getCandidateById(int id) =>
+      caller.callServerEndpoint<_i3.Candidate?>(
+        'candidate',
+        'getCandidateById',
+        {'id': id},
+      );
+
+  _i2.Future<List<_i3.Candidate>> getAllCandidates() =>
+      caller.callServerEndpoint<List<_i3.Candidate>>(
+        'candidate',
+        'getAllCandidates',
+        {},
+      );
+}
+
+/// {@category Endpoint}
 class EndpointExample extends _i1.EndpointRef {
   EndpointExample(_i1.EndpointCaller caller) : super(caller);
 
@@ -25,36 +61,6 @@ class EndpointExample extends _i1.EndpointRef {
         'example',
         'hello',
         {'name': name},
-      );
-}
-
-/// {@category Endpoint}
-class EndpointGetAllCandidates extends _i1.EndpointRef {
-  EndpointGetAllCandidates(_i1.EndpointCaller caller) : super(caller);
-
-  @override
-  String get name => 'getAllCandidates';
-
-  _i2.Future<List<_i3.Candidate>> getAllCandidates() =>
-      caller.callServerEndpoint<List<_i3.Candidate>>(
-        'getAllCandidates',
-        'getAllCandidates',
-        {},
-      );
-}
-
-/// {@category Endpoint}
-class EndpointGetCandidateById extends _i1.EndpointRef {
-  EndpointGetCandidateById(_i1.EndpointCaller caller) : super(caller);
-
-  @override
-  String get name => 'getCandidateById';
-
-  _i2.Future<_i3.Candidate?> getCandidateById(int id) =>
-      caller.callServerEndpoint<_i3.Candidate?>(
-        'getCandidateById',
-        'getCandidateById',
-        {'id': id},
       );
 }
 
@@ -84,22 +90,18 @@ class Client extends _i1.ServerpodClientShared {
           disconnectStreamsOnLostInternetConnection:
               disconnectStreamsOnLostInternetConnection,
         ) {
+    candidate = EndpointCandidate(this);
     example = EndpointExample(this);
-    getAllCandidates = EndpointGetAllCandidates(this);
-    getCandidateById = EndpointGetCandidateById(this);
   }
+
+  late final EndpointCandidate candidate;
 
   late final EndpointExample example;
 
-  late final EndpointGetAllCandidates getAllCandidates;
-
-  late final EndpointGetCandidateById getCandidateById;
-
   @override
   Map<String, _i1.EndpointRef> get endpointRefLookup => {
+        'candidate': candidate,
         'example': example,
-        'getAllCandidates': getAllCandidates,
-        'getCandidateById': getCandidateById,
       };
 
   @override

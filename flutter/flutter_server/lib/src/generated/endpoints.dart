@@ -10,33 +10,98 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod/serverpod.dart' as _i1;
-import '../endpoints/example_endpoint.dart' as _i2;
-import '../endpoints/get_all_candidates_endpoint.dart' as _i3;
-import '../endpoints/get_candidate_by_id_endpoint.dart' as _i4;
+import '../endpoints/create_candidate_endpoint.dart' as _i2;
+import '../endpoints/example_endpoint.dart' as _i3;
+import 'package:flutter_server/src/generated/candidate.modal.dart' as _i4;
 
 class Endpoints extends _i1.EndpointDispatch {
   @override
   void initializeEndpoints(_i1.Server server) {
     var endpoints = <String, _i1.Endpoint>{
-      'example': _i2.ExampleEndpoint()
+      'candidate': _i2.CandidateEndpoint()
+        ..initialize(
+          server,
+          'candidate',
+          null,
+        ),
+      'example': _i3.ExampleEndpoint()
         ..initialize(
           server,
           'example',
           null,
         ),
-      'getAllCandidates': _i3.GetAllCandidatesEndpoint()
-        ..initialize(
-          server,
-          'getAllCandidates',
-          null,
-        ),
-      'getCandidateById': _i4.GetCandidateByIdEndpoint()
-        ..initialize(
-          server,
-          'getCandidateById',
-          null,
-        ),
     };
+    connectors['candidate'] = _i1.EndpointConnector(
+      name: 'candidate',
+      endpoint: endpoints['candidate']!,
+      methodConnectors: {
+        'create': _i1.MethodConnector(
+          name: 'create',
+          params: {
+            'candidate': _i1.ParameterDescription(
+              name: 'candidate',
+              type: _i1.getType<_i4.Candidate>(),
+              nullable: false,
+            )
+          },
+          call: (
+            _i1.Session session,
+            Map<String, dynamic> params,
+          ) async =>
+              (endpoints['candidate'] as _i2.CandidateEndpoint).create(
+            session,
+            params['candidate'],
+          ),
+        ),
+        'delete': _i1.MethodConnector(
+          name: 'delete',
+          params: {
+            'candidate': _i1.ParameterDescription(
+              name: 'candidate',
+              type: _i1.getType<_i4.Candidate>(),
+              nullable: false,
+            )
+          },
+          call: (
+            _i1.Session session,
+            Map<String, dynamic> params,
+          ) async =>
+              (endpoints['candidate'] as _i2.CandidateEndpoint).delete(
+            session,
+            params['candidate'],
+          ),
+        ),
+        'getCandidateById': _i1.MethodConnector(
+          name: 'getCandidateById',
+          params: {
+            'id': _i1.ParameterDescription(
+              name: 'id',
+              type: _i1.getType<int>(),
+              nullable: false,
+            )
+          },
+          call: (
+            _i1.Session session,
+            Map<String, dynamic> params,
+          ) async =>
+              (endpoints['candidate'] as _i2.CandidateEndpoint)
+                  .getCandidateById(
+            session,
+            params['id'],
+          ),
+        ),
+        'getAllCandidates': _i1.MethodConnector(
+          name: 'getAllCandidates',
+          params: {},
+          call: (
+            _i1.Session session,
+            Map<String, dynamic> params,
+          ) async =>
+              (endpoints['candidate'] as _i2.CandidateEndpoint)
+                  .getAllCandidates(session),
+        ),
+      },
+    );
     connectors['example'] = _i1.EndpointConnector(
       name: 'example',
       endpoint: endpoints['example']!,
@@ -54,50 +119,9 @@ class Endpoints extends _i1.EndpointDispatch {
             _i1.Session session,
             Map<String, dynamic> params,
           ) async =>
-              (endpoints['example'] as _i2.ExampleEndpoint).hello(
+              (endpoints['example'] as _i3.ExampleEndpoint).hello(
             session,
             params['name'],
-          ),
-        )
-      },
-    );
-    connectors['getAllCandidates'] = _i1.EndpointConnector(
-      name: 'getAllCandidates',
-      endpoint: endpoints['getAllCandidates']!,
-      methodConnectors: {
-        'getAllCandidates': _i1.MethodConnector(
-          name: 'getAllCandidates',
-          params: {},
-          call: (
-            _i1.Session session,
-            Map<String, dynamic> params,
-          ) async =>
-              (endpoints['getAllCandidates'] as _i3.GetAllCandidatesEndpoint)
-                  .getAllCandidates(session),
-        )
-      },
-    );
-    connectors['getCandidateById'] = _i1.EndpointConnector(
-      name: 'getCandidateById',
-      endpoint: endpoints['getCandidateById']!,
-      methodConnectors: {
-        'getCandidateById': _i1.MethodConnector(
-          name: 'getCandidateById',
-          params: {
-            'id': _i1.ParameterDescription(
-              name: 'id',
-              type: _i1.getType<int>(),
-              nullable: false,
-            )
-          },
-          call: (
-            _i1.Session session,
-            Map<String, dynamic> params,
-          ) async =>
-              (endpoints['getCandidateById'] as _i4.GetCandidateByIdEndpoint)
-                  .getCandidateById(
-            session,
-            params['id'],
           ),
         )
       },
