@@ -1,7 +1,14 @@
-candidate:
+post:
   - create:
   - delete:
-  - getCandidateById:
-  - getAllCandidates:
-example:
-  - hello:
+  - update:
+  - getPostById:
+  - getPostByIdWithUser:
+  - getAllPosts:
+  - getAllPostsWithUsers:
+user:
+  - create:
+  - delete:
+  - update:
+  - getUserById:
+  - getAllUsers:

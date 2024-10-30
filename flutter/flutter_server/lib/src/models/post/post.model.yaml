@@ -1,0 +1,10 @@
+class: Post
+
+table: post
+
+fields:
+  user: User?, relation
+  title: String
+  html: String
+  publishDate: DateTime
+  img: String?

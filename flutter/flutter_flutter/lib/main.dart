@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_client/flutter_client.dart';
+import 'package:flutter_flutter/ui/screens/home/home_screen.dart';
 import 'package:serverpod_flutter/serverpod_flutter.dart';
 
 // Sets up a singleton client object that can be used to talk to the server from
@@ -22,116 +23,32 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       theme: ThemeData(
           useMaterial3: true,
-          colorSchemeSeed: Colors.white,
-          scaffoldBackgroundColor: Colors.white),
+          colorScheme: ColorScheme.fromSeed(
+              seedColor: Colors.teal, brightness: Brightness.light)),
       home: Scaffold(
-        //appBar: AppBar(title: const Text('Adaptive Column of Rows')),
-        body: const MyHomePage(),
+        //backgroundColor: Theme.of(context).colorScheme.surfaceDim,
+        appBar: AppBar(
+            //backgroundColor: Theme.of(context).colorScheme.surfaceContainerLowest,
+            title: SelectableText.rich(TextSpan(children: [
+              TextSpan(
+                  text: "M.",
+                  style: Theme.of(context).textTheme.headlineSmall!.copyWith(
+                      fontWeight: FontWeight.w800,
+                      color: Theme.of(context).colorScheme.secondary)),
+              TextSpan(
+                  text: "SUPEŁ",
+                  style: Theme.of(context).textTheme.headlineSmall!.copyWith(
+                      color: Theme.of(context).colorScheme.tertiary,
+                      fontWeight: FontWeight.w800)),
+              TextSpan(text: "", style: Theme.of(context).textTheme.titleLarge),
+            ])),
+            centerTitle: false,
+            bottom: const PreferredSize(
+              preferredSize: Size.fromHeight(1),
+              child: Divider(height: 1),
+            )),
+        body: HomeScreen(),
       ),
-    );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key});
-
-  @override
-  MyHomePageState createState() => MyHomePageState();
-}
-
-class MyHomePageState extends State<MyHomePage> {
-  Widget buildRow(BuildContext context, List<String> items) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: items.map((item) => Expanded(child: Text(item))).toList(),
-    );
-  }
-
-  int _selectedIndex = 0;
-  NavigationRailLabelType labelType = NavigationRailLabelType.all;
-  double groupAlignment = -1.0;
-
-  Candidate? _candidate;
-  Exception? _connectionException;
-
-  Future<void> _loadCandidate() async {
-    try {
-      final candidate = await client.candidate.getCandidateById(1);
-      setState(() {
-        _candidate = candidate;
-      });
-    } catch (e) {
-      _connectionFailed(e);
-    }
-  }
-
-  void _connectionFailed(dynamic exception) {
-    setState(() {
-      _candidate = null;
-      _connectionException = exception;
-    });
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    _loadCandidate();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return LayoutBuilder(
-      builder: (context, constraints) {
-        return Scaffold(
-          body: Row(
-            children: <Widget>[
-              NavigationRail(
-                selectedIndex: _selectedIndex,
-                groupAlignment: groupAlignment,
-                onDestinationSelected: (int index) {
-                  setState(() {
-                    _selectedIndex = index;
-                  });
-                },
-                labelType: labelType,
-                destinations: const <NavigationRailDestination>[
-                  NavigationRailDestination(
-                    icon: Icon(Icons.person_outlined),
-                    selectedIcon: Icon(Icons.person),
-                    label: Text('About me'),
-                  ),
-                  NavigationRailDestination(
-                    icon: Icon(Icons.rocket_launch_outlined),
-                    selectedIcon: Icon(Icons.rocket_launch),
-                    label: Text('Services'),
-                  ),
-                  NavigationRailDestination(
-                    icon: Icon(Icons.star_border),
-                    selectedIcon: Icon(Icons.star),
-                    label: Text('Experience'),
-                  ),
-                ],
-              ),
-              const VerticalDivider(thickness: 1, width: 1),
-              // This is the main content.
-              Expanded(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[],
-                ),
-              ),
-            ],
-          ),
-        );
-
-        return Column(
-          children: [
-            buildRow(context, ['Item 1', 'Item 2']),
-            buildRow(context, ['Item 1', 'Item 2', 'Item 3']),
-            buildRow(context, ['Item 1']),
-          ],
-        );
-      },
     );
   }
 }

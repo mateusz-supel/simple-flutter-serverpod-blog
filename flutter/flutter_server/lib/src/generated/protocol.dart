@@ -12,15 +12,14 @@ library protocol; // ignore_for_file: no_leading_underscores_for_library_prefixe
 
 import 'package:serverpod/serverpod.dart' as _i1;
 import 'package:serverpod/protocol.dart' as _i2;
-import 'candidate.modal.dart' as _i3;
-import 'candidate_details.model.dart' as _i4;
-import 'example.dart' as _i5;
-import 'phone_number.model.dart' as _i6;
-import 'package:flutter_server/src/generated/candidate.modal.dart' as _i7;
-export 'candidate.modal.dart';
-export 'candidate_details.model.dart';
+import 'example.dart' as _i3;
+import 'post/post.model.dart' as _i4;
+import 'user.model.dart' as _i5;
+import 'package:flutter_server/src/generated/post/post.model.dart' as _i6;
+import 'package:flutter_server/src/generated/user.model.dart' as _i7;
 export 'example.dart';
-export 'phone_number.model.dart';
+export 'post/post.model.dart';
+export 'user.model.dart';
 
 class Protocol extends _i1.SerializationManagerServer {
   Protocol._();
@@ -31,8 +30,8 @@ class Protocol extends _i1.SerializationManagerServer {
 
   static final List<_i2.TableDefinition> targetTableDefinitions = [
     _i2.TableDefinition(
-      name: 'candidate',
-      dartName: 'Candidate',
+      name: 'post',
+      dartName: 'Post',
       schema: 'public',
       module: 'flutter',
       columns: [
@@ -41,19 +40,54 @@ class Protocol extends _i1.SerializationManagerServer {
           columnType: _i2.ColumnType.bigint,
           isNullable: false,
           dartType: 'int?',
-          columnDefault: 'nextval(\'candidate_id_seq\'::regclass)',
+          columnDefault: 'nextval(\'post_id_seq\'::regclass)',
         ),
         _i2.ColumnDefinition(
-          name: 'details',
-          columnType: _i2.ColumnType.json,
+          name: 'userId',
+          columnType: _i2.ColumnType.bigint,
           isNullable: false,
-          dartType: 'protocol:CandidateDetails',
+          dartType: 'int',
+        ),
+        _i2.ColumnDefinition(
+          name: 'title',
+          columnType: _i2.ColumnType.text,
+          isNullable: false,
+          dartType: 'String',
+        ),
+        _i2.ColumnDefinition(
+          name: 'html',
+          columnType: _i2.ColumnType.text,
+          isNullable: false,
+          dartType: 'String',
+        ),
+        _i2.ColumnDefinition(
+          name: 'publishDate',
+          columnType: _i2.ColumnType.timestampWithoutTimeZone,
+          isNullable: false,
+          dartType: 'DateTime',
+        ),
+        _i2.ColumnDefinition(
+          name: 'img',
+          columnType: _i2.ColumnType.text,
+          isNullable: true,
+          dartType: 'String?',
         ),
       ],
-      foreignKeys: [],
+      foreignKeys: [
+        _i2.ForeignKeyDefinition(
+          constraintName: 'post_fk_0',
+          columns: ['userId'],
+          referenceTable: 'user',
+          referenceTableSchema: 'public',
+          referenceColumns: ['id'],
+          onUpdate: _i2.ForeignKeyAction.noAction,
+          onDelete: _i2.ForeignKeyAction.noAction,
+          matchType: null,
+        )
+      ],
       indexes: [
         _i2.IndexDefinition(
-          indexName: 'candidate_pkey',
+          indexName: 'post_pkey',
           tableSpace: null,
           elements: [
             _i2.IndexElementDefinition(
@@ -69,8 +103,8 @@ class Protocol extends _i1.SerializationManagerServer {
       managed: true,
     ),
     _i2.TableDefinition(
-      name: 'candidate_details',
-      dartName: 'CandidateDetails',
+      name: 'user',
+      dartName: 'User',
       schema: 'public',
       module: 'flutter',
       columns: [
@@ -79,49 +113,25 @@ class Protocol extends _i1.SerializationManagerServer {
           columnType: _i2.ColumnType.bigint,
           isNullable: false,
           dartType: 'int?',
-          columnDefault: 'nextval(\'candidate_details_id_seq\'::regclass)',
+          columnDefault: 'nextval(\'user_id_seq\'::regclass)',
         ),
         _i2.ColumnDefinition(
-          name: 'name',
+          name: 'userName',
           columnType: _i2.ColumnType.text,
           isNullable: false,
           dartType: 'String',
         ),
         _i2.ColumnDefinition(
-          name: 'surname',
+          name: 'img',
           columnType: _i2.ColumnType.text,
-          isNullable: false,
-          dartType: 'String',
-        ),
-        _i2.ColumnDefinition(
-          name: 'location',
-          columnType: _i2.ColumnType.text,
-          isNullable: false,
-          dartType: 'String',
-        ),
-        _i2.ColumnDefinition(
-          name: 'phoneNumber',
-          columnType: _i2.ColumnType.json,
-          isNullable: false,
-          dartType: 'protocol:PhoneNumber',
-        ),
-        _i2.ColumnDefinition(
-          name: 'email',
-          columnType: _i2.ColumnType.text,
-          isNullable: false,
-          dartType: 'String',
-        ),
-        _i2.ColumnDefinition(
-          name: 'linkedInUrl',
-          columnType: _i2.ColumnType.text,
-          isNullable: false,
-          dartType: 'String',
+          isNullable: true,
+          dartType: 'String?',
         ),
       ],
       foreignKeys: [],
       indexes: [
         _i2.IndexDefinition(
-          indexName: 'candidate_details_pkey',
+          indexName: 'user_pkey',
           tableSpace: null,
           elements: [
             _i2.IndexElementDefinition(
@@ -145,32 +155,30 @@ class Protocol extends _i1.SerializationManagerServer {
     Type? t,
   ]) {
     t ??= T;
-    if (t == _i3.Candidate) {
-      return _i3.Candidate.fromJson(data) as T;
+    if (t == _i3.Example) {
+      return _i3.Example.fromJson(data) as T;
     }
-    if (t == _i4.CandidateDetails) {
-      return _i4.CandidateDetails.fromJson(data) as T;
+    if (t == _i4.Post) {
+      return _i4.Post.fromJson(data) as T;
     }
-    if (t == _i5.Example) {
-      return _i5.Example.fromJson(data) as T;
+    if (t == _i5.User) {
+      return _i5.User.fromJson(data) as T;
     }
-    if (t == _i6.PhoneNumber) {
-      return _i6.PhoneNumber.fromJson(data) as T;
+    if (t == _i1.getType<_i3.Example?>()) {
+      return (data != null ? _i3.Example.fromJson(data) : null) as T;
     }
-    if (t == _i1.getType<_i3.Candidate?>()) {
-      return (data != null ? _i3.Candidate.fromJson(data) : null) as T;
+    if (t == _i1.getType<_i4.Post?>()) {
+      return (data != null ? _i4.Post.fromJson(data) : null) as T;
     }
-    if (t == _i1.getType<_i4.CandidateDetails?>()) {
-      return (data != null ? _i4.CandidateDetails.fromJson(data) : null) as T;
+    if (t == _i1.getType<_i5.User?>()) {
+      return (data != null ? _i5.User.fromJson(data) : null) as T;
     }
-    if (t == _i1.getType<_i5.Example?>()) {
-      return (data != null ? _i5.Example.fromJson(data) : null) as T;
+    if (t == List<_i6.Post>) {
+      return (data as List).map((e) => deserialize<_i6.Post>(e)).toList()
+          as dynamic;
     }
-    if (t == _i1.getType<_i6.PhoneNumber?>()) {
-      return (data != null ? _i6.PhoneNumber.fromJson(data) : null) as T;
-    }
-    if (t == List<_i7.Candidate>) {
-      return (data as List).map((e) => deserialize<_i7.Candidate>(e)).toList()
+    if (t == List<_i7.User>) {
+      return (data as List).map((e) => deserialize<_i7.User>(e)).toList()
           as dynamic;
     }
     try {
@@ -183,17 +191,14 @@ class Protocol extends _i1.SerializationManagerServer {
   String? getClassNameForObject(Object? data) {
     String? className = super.getClassNameForObject(data);
     if (className != null) return className;
-    if (data is _i3.Candidate) {
-      return 'Candidate';
-    }
-    if (data is _i4.CandidateDetails) {
-      return 'CandidateDetails';
-    }
-    if (data is _i5.Example) {
+    if (data is _i3.Example) {
       return 'Example';
     }
-    if (data is _i6.PhoneNumber) {
-      return 'PhoneNumber';
+    if (data is _i4.Post) {
+      return 'Post';
+    }
+    if (data is _i5.User) {
+      return 'User';
     }
     className = _i2.Protocol().getClassNameForObject(data);
     if (className != null) {
@@ -204,17 +209,14 @@ class Protocol extends _i1.SerializationManagerServer {
 
   @override
   dynamic deserializeByClassName(Map<String, dynamic> data) {
-    if (data['className'] == 'Candidate') {
-      return deserialize<_i3.Candidate>(data['data']);
-    }
-    if (data['className'] == 'CandidateDetails') {
-      return deserialize<_i4.CandidateDetails>(data['data']);
-    }
     if (data['className'] == 'Example') {
-      return deserialize<_i5.Example>(data['data']);
+      return deserialize<_i3.Example>(data['data']);
     }
-    if (data['className'] == 'PhoneNumber') {
-      return deserialize<_i6.PhoneNumber>(data['data']);
+    if (data['className'] == 'Post') {
+      return deserialize<_i4.Post>(data['data']);
+    }
+    if (data['className'] == 'User') {
+      return deserialize<_i5.User>(data['data']);
     }
     if (data['className'].startsWith('serverpod.')) {
       data['className'] = data['className'].substring(10);
@@ -232,10 +234,10 @@ class Protocol extends _i1.SerializationManagerServer {
       }
     }
     switch (t) {
-      case _i3.Candidate:
-        return _i3.Candidate.t;
-      case _i4.CandidateDetails:
-        return _i4.CandidateDetails.t;
+      case _i4.Post:
+        return _i4.Post.t;
+      case _i5.User:
+        return _i5.User.t;
     }
     return null;
   }

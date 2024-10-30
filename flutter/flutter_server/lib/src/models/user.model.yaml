@@ -1,0 +1,7 @@
+class: User
+
+table: user
+
+fields:
+  userName: String
+  img: String?

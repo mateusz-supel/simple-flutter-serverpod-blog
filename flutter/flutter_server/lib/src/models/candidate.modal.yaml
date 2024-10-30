@@ -1,6 +1,0 @@
-class: Candidate
-
-table: candidate
-
-fields:
-  details: CandidateDetails

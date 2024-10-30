@@ -11,56 +11,105 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod_client/serverpod_client.dart' as _i1;
 import 'dart:async' as _i2;
-import 'package:flutter_client/src/protocol/candidate.modal.dart' as _i3;
-import 'protocol.dart' as _i4;
+import 'package:flutter_client/src/protocol/post/post.model.dart' as _i3;
+import 'package:flutter_client/src/protocol/user.model.dart' as _i4;
+import 'protocol.dart' as _i5;
 
 /// {@category Endpoint}
-class EndpointCandidate extends _i1.EndpointRef {
-  EndpointCandidate(_i1.EndpointCaller caller) : super(caller);
+class EndpointPost extends _i1.EndpointRef {
+  EndpointPost(_i1.EndpointCaller caller) : super(caller);
 
   @override
-  String get name => 'candidate';
+  String get name => 'post';
 
-  _i2.Future<_i3.Candidate> create(_i3.Candidate candidate) =>
-      caller.callServerEndpoint<_i3.Candidate>(
-        'candidate',
+  _i2.Future<_i3.Post> create(_i3.Post post) =>
+      caller.callServerEndpoint<_i3.Post>(
+        'post',
         'create',
-        {'candidate': candidate},
+        {'post': post},
       );
 
-  _i2.Future<void> delete(_i3.Candidate candidate) =>
-      caller.callServerEndpoint<void>(
-        'candidate',
+  _i2.Future<void> delete(_i3.Post post) => caller.callServerEndpoint<void>(
+        'post',
         'delete',
-        {'candidate': candidate},
+        {'post': post},
       );
 
-  _i2.Future<_i3.Candidate?> getCandidateById(int id) =>
-      caller.callServerEndpoint<_i3.Candidate?>(
-        'candidate',
-        'getCandidateById',
+  _i2.Future<_i3.Post> update(_i3.Post post) =>
+      caller.callServerEndpoint<_i3.Post>(
+        'post',
+        'update',
+        {'post': post},
+      );
+
+  _i2.Future<_i3.Post?> getPostById(int id) =>
+      caller.callServerEndpoint<_i3.Post?>(
+        'post',
+        'getPostById',
         {'id': id},
       );
 
-  _i2.Future<List<_i3.Candidate>> getAllCandidates() =>
-      caller.callServerEndpoint<List<_i3.Candidate>>(
-        'candidate',
-        'getAllCandidates',
+  _i2.Future<_i3.Post?> getPostByIdWithUser(int id) =>
+      caller.callServerEndpoint<_i3.Post?>(
+        'post',
+        'getPostByIdWithUser',
+        {'id': id},
+      );
+
+  _i2.Future<List<_i3.Post>> getAllPosts() =>
+      caller.callServerEndpoint<List<_i3.Post>>(
+        'post',
+        'getAllPosts',
+        {},
+      );
+
+  _i2.Future<List<_i3.Post>> getAllPostsWithUsers() =>
+      caller.callServerEndpoint<List<_i3.Post>>(
+        'post',
+        'getAllPostsWithUsers',
         {},
       );
 }
 
 /// {@category Endpoint}
-class EndpointExample extends _i1.EndpointRef {
-  EndpointExample(_i1.EndpointCaller caller) : super(caller);
+class EndpointUser extends _i1.EndpointRef {
+  EndpointUser(_i1.EndpointCaller caller) : super(caller);
 
   @override
-  String get name => 'example';
+  String get name => 'user';
 
-  _i2.Future<String> hello(String name) => caller.callServerEndpoint<String>(
-        'example',
-        'hello',
-        {'name': name},
+  _i2.Future<_i4.User> create(_i4.User user) =>
+      caller.callServerEndpoint<_i4.User>(
+        'user',
+        'create',
+        {'user': user},
+      );
+
+  _i2.Future<void> delete(_i4.User user) => caller.callServerEndpoint<void>(
+        'user',
+        'delete',
+        {'user': user},
+      );
+
+  _i2.Future<_i4.User> update(_i4.User user) =>
+      caller.callServerEndpoint<_i4.User>(
+        'user',
+        'update',
+        {'user': user},
+      );
+
+  _i2.Future<_i4.User?> getUserById(int id) =>
+      caller.callServerEndpoint<_i4.User?>(
+        'user',
+        'getUserById',
+        {'id': id},
+      );
+
+  _i2.Future<List<_i4.User>> getAllUsers() =>
+      caller.callServerEndpoint<List<_i4.User>>(
+        'user',
+        'getAllUsers',
+        {},
       );
 }
 
@@ -80,7 +129,7 @@ class Client extends _i1.ServerpodClientShared {
     bool? disconnectStreamsOnLostInternetConnection,
   }) : super(
           host,
-          _i4.Protocol(),
+          _i5.Protocol(),
           securityContext: securityContext,
           authenticationKeyManager: authenticationKeyManager,
           streamingConnectionTimeout: streamingConnectionTimeout,
@@ -90,18 +139,18 @@ class Client extends _i1.ServerpodClientShared {
           disconnectStreamsOnLostInternetConnection:
               disconnectStreamsOnLostInternetConnection,
         ) {
-    candidate = EndpointCandidate(this);
-    example = EndpointExample(this);
+    post = EndpointPost(this);
+    user = EndpointUser(this);
   }
 
-  late final EndpointCandidate candidate;
+  late final EndpointPost post;
 
-  late final EndpointExample example;
+  late final EndpointUser user;
 
   @override
   Map<String, _i1.EndpointRef> get endpointRefLookup => {
-        'candidate': candidate,
-        'example': example,
+        'post': post,
+        'user': user,
       };
 
   @override

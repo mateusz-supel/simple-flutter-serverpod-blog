@@ -1,0 +1,29 @@
+{
+  "actions": [
+    {
+      "type": "deleteTable",
+      "deleteTable": "candidate_details"
+    },
+    {
+      "type": "deleteTable",
+      "deleteTable": "candidate"
+    }
+  ],
+  "warnings": [
+    {
+      "type": "tableDropped",
+      "message": "Table \"candidate_details\" will be dropped.",
+      "table": "candidate_details",
+      "columns": [],
+      "destrucive": true
+    },
+    {
+      "type": "tableDropped",
+      "message": "Table \"candidate\" will be dropped.",
+      "table": "candidate",
+      "columns": [],
+      "destrucive": true
+    }
+  ],
+  "migrationApiVersion": 1
+}
