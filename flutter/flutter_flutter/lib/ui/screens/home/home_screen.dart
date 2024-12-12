@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_flutter/ui/screens/home/widgets/welcome_header.dart';
-import 'package:flutter_flutter/ui/screens/post/posts_list_widget.dart';
+import 'package:flutter_flutter/ui/screens/post/post_widget.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});

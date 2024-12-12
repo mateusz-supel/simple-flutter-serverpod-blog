@@ -1,0 +1,11 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Start Serverpod Server",
+			"type": "shell",
+			"command": "sh scripts/run_serverpod.sh",
+			"problemMatcher": []
+		}
+	]
+}

@@ -2,9 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 
 class HtmlWidget extends StatelessWidget {
-  const HtmlWidget({super.key, required this.html});
+  const HtmlWidget(
+      {super.key,
+      required this.html,
+      this.padding,
+      this.maxLines,
+      this.textOverflow});
 
   final String html;
+  final HtmlPaddings? padding;
+  final int? maxLines;
+  final TextOverflow? textOverflow;
 
   @override
   Widget build(BuildContext context) {
@@ -12,9 +20,7 @@ class HtmlWidget extends StatelessWidget {
       data: html,
       style: {
         "#": Style(
-            padding: HtmlPaddings.zero,
-            maxLines: 4,
-            textOverflow: TextOverflow.ellipsis),
+            padding: padding, maxLines: maxLines, textOverflow: textOverflow),
         "h1": Style(
             lineHeight: LineHeight.number(1),
             fontWeight: FontWeight.w400,

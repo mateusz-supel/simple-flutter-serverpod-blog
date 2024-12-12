@@ -20,7 +20,8 @@ abstract class Post implements _i1.SerializableModel {
     required this.title,
     required this.html,
     required this.publishDate,
-    this.img,
+    this.headerImg,
+    this.contentImg,
   });
 
   factory Post({
@@ -30,7 +31,8 @@ abstract class Post implements _i1.SerializableModel {
     required String title,
     required String html,
     required DateTime publishDate,
-    String? img,
+    String? headerImg,
+    String? contentImg,
   }) = _PostImpl;
 
   factory Post.fromJson(Map<String, dynamic> jsonSerialization) {
@@ -45,7 +47,8 @@ abstract class Post implements _i1.SerializableModel {
       html: jsonSerialization['html'] as String,
       publishDate:
           _i1.DateTimeJsonExtension.fromJson(jsonSerialization['publishDate']),
-      img: jsonSerialization['img'] as String?,
+      headerImg: jsonSerialization['headerImg'] as String?,
+      contentImg: jsonSerialization['contentImg'] as String?,
     );
   }
 
@@ -64,7 +67,9 @@ abstract class Post implements _i1.SerializableModel {
 
   DateTime publishDate;
 
-  String? img;
+  String? headerImg;
+
+  String? contentImg;
 
   Post copyWith({
     int? id,
@@ -73,7 +78,8 @@ abstract class Post implements _i1.SerializableModel {
     String? title,
     String? html,
     DateTime? publishDate,
-    String? img,
+    String? headerImg,
+    String? contentImg,
   });
   @override
   Map<String, dynamic> toJson() {
@@ -84,7 +90,8 @@ abstract class Post implements _i1.SerializableModel {
       'title': title,
       'html': html,
       'publishDate': publishDate.toJson(),
-      if (img != null) 'img': img,
+      if (headerImg != null) 'headerImg': headerImg,
+      if (contentImg != null) 'contentImg': contentImg,
     };
   }
 
@@ -104,7 +111,8 @@ class _PostImpl extends Post {
     required String title,
     required String html,
     required DateTime publishDate,
-    String? img,
+    String? headerImg,
+    String? contentImg,
   }) : super._(
           id: id,
           userId: userId,
@@ -112,7 +120,8 @@ class _PostImpl extends Post {
           title: title,
           html: html,
           publishDate: publishDate,
-          img: img,
+          headerImg: headerImg,
+          contentImg: contentImg,
         );
 
   @override
@@ -123,7 +132,8 @@ class _PostImpl extends Post {
     String? title,
     String? html,
     DateTime? publishDate,
-    Object? img = _Undefined,
+    Object? headerImg = _Undefined,
+    Object? contentImg = _Undefined,
   }) {
     return Post(
       id: id is int? ? id : this.id,
@@ -132,7 +142,8 @@ class _PostImpl extends Post {
       title: title ?? this.title,
       html: html ?? this.html,
       publishDate: publishDate ?? this.publishDate,
-      img: img is String? ? img : this.img,
+      headerImg: headerImg is String? ? headerImg : this.headerImg,
+      contentImg: contentImg is String? ? contentImg : this.contentImg,
     );
   }
 }

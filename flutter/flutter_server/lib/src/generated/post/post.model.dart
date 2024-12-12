@@ -22,7 +22,8 @@ abstract class Post implements _i1.TableRow, _i1.ProtocolSerialization {
     required this.title,
     required this.html,
     required this.publishDate,
-    this.img,
+    this.headerImg,
+    this.contentImg,
   });
 
   factory Post({
@@ -32,7 +33,8 @@ abstract class Post implements _i1.TableRow, _i1.ProtocolSerialization {
     required String title,
     required String html,
     required DateTime publishDate,
-    String? img,
+    String? headerImg,
+    String? contentImg,
   }) = _PostImpl;
 
   factory Post.fromJson(Map<String, dynamic> jsonSerialization) {
@@ -47,7 +49,8 @@ abstract class Post implements _i1.TableRow, _i1.ProtocolSerialization {
       html: jsonSerialization['html'] as String,
       publishDate:
           _i1.DateTimeJsonExtension.fromJson(jsonSerialization['publishDate']),
-      img: jsonSerialization['img'] as String?,
+      headerImg: jsonSerialization['headerImg'] as String?,
+      contentImg: jsonSerialization['contentImg'] as String?,
     );
   }
 
@@ -68,7 +71,9 @@ abstract class Post implements _i1.TableRow, _i1.ProtocolSerialization {
 
   DateTime publishDate;
 
-  String? img;
+  String? headerImg;
+
+  String? contentImg;
 
   @override
   _i1.Table get table => t;
@@ -80,7 +85,8 @@ abstract class Post implements _i1.TableRow, _i1.ProtocolSerialization {
     String? title,
     String? html,
     DateTime? publishDate,
-    String? img,
+    String? headerImg,
+    String? contentImg,
   });
   @override
   Map<String, dynamic> toJson() {
@@ -91,7 +97,8 @@ abstract class Post implements _i1.TableRow, _i1.ProtocolSerialization {
       'title': title,
       'html': html,
       'publishDate': publishDate.toJson(),
-      if (img != null) 'img': img,
+      if (headerImg != null) 'headerImg': headerImg,
+      if (contentImg != null) 'contentImg': contentImg,
     };
   }
 
@@ -104,7 +111,8 @@ abstract class Post implements _i1.TableRow, _i1.ProtocolSerialization {
       'title': title,
       'html': html,
       'publishDate': publishDate.toJson(),
-      if (img != null) 'img': img,
+      if (headerImg != null) 'headerImg': headerImg,
+      if (contentImg != null) 'contentImg': contentImg,
     };
   }
 
@@ -148,7 +156,8 @@ class _PostImpl extends Post {
     required String title,
     required String html,
     required DateTime publishDate,
-    String? img,
+    String? headerImg,
+    String? contentImg,
   }) : super._(
           id: id,
           userId: userId,
@@ -156,7 +165,8 @@ class _PostImpl extends Post {
           title: title,
           html: html,
           publishDate: publishDate,
-          img: img,
+          headerImg: headerImg,
+          contentImg: contentImg,
         );
 
   @override
@@ -167,7 +177,8 @@ class _PostImpl extends Post {
     String? title,
     String? html,
     DateTime? publishDate,
-    Object? img = _Undefined,
+    Object? headerImg = _Undefined,
+    Object? contentImg = _Undefined,
   }) {
     return Post(
       id: id is int? ? id : this.id,
@@ -176,7 +187,8 @@ class _PostImpl extends Post {
       title: title ?? this.title,
       html: html ?? this.html,
       publishDate: publishDate ?? this.publishDate,
-      img: img is String? ? img : this.img,
+      headerImg: headerImg is String? ? headerImg : this.headerImg,
+      contentImg: contentImg is String? ? contentImg : this.contentImg,
     );
   }
 }
@@ -199,8 +211,12 @@ class PostTable extends _i1.Table {
       'publishDate',
       this,
     );
-    img = _i1.ColumnString(
-      'img',
+    headerImg = _i1.ColumnString(
+      'headerImg',
+      this,
+    );
+    contentImg = _i1.ColumnString(
+      'contentImg',
       this,
     );
   }
@@ -215,7 +231,9 @@ class PostTable extends _i1.Table {
 
   late final _i1.ColumnDateTime publishDate;
 
-  late final _i1.ColumnString img;
+  late final _i1.ColumnString headerImg;
+
+  late final _i1.ColumnString contentImg;
 
   _i2.UserTable get user {
     if (_user != null) return _user!;
@@ -237,7 +255,8 @@ class PostTable extends _i1.Table {
         title,
         html,
         publishDate,
-        img,
+        headerImg,
+        contentImg,
       ];
 
   @override

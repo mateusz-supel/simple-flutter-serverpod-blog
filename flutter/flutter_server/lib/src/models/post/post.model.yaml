@@ -7,4 +7,5 @@ fields:
   title: String
   html: String
   publishDate: DateTime
-  img: String?
+  headerImg: String?
+  contentImg: String?

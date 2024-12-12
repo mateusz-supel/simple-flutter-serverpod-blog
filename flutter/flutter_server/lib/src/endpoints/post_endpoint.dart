@@ -19,7 +19,8 @@ class PostEndpoint extends Endpoint {
 
   Future<Post?> getPostById(Session session, int id) async {
     final Post? post = await Post.db.findById(session, id);
-    post?.img = await post.getPresignedS3ImgUrl();
+    post?.headerImg = await post.getPresignedS3ImgUrl(post.headerImg);
+    post?.contentImg = await post.getPresignedS3ImgUrl(post.contentImg);
     return post;
   }
 
@@ -29,8 +30,9 @@ class PostEndpoint extends Endpoint {
       id,
       include: Post.include(user: User.include()),
     );
-    post?.img = await post.getPresignedS3ImgUrl();
-    post?.user?.img = await post.user?.getPresignedS3ImgUrl();
+    post?.headerImg = await post.getPresignedS3ImgUrl(post.headerImg);
+    post?.contentImg = await post.getPresignedS3ImgUrl(post.contentImg);
+    post?.user?.img = await post.user?.getPresignedS3ImgUrl(post.user?.img);
     return post;
   }
 
@@ -40,7 +42,8 @@ class PostEndpoint extends Endpoint {
       orderBy: (t) => t.id,
     );
     for (Post post in posts) {
-      post.img = await post.getPresignedS3ImgUrl();
+      post.headerImg = await post.getPresignedS3ImgUrl(post.headerImg);
+      post.contentImg = await post.getPresignedS3ImgUrl(post.contentImg);
     }
     return posts;
   }
@@ -52,8 +55,9 @@ class PostEndpoint extends Endpoint {
       include: Post.include(user: User.include()),
     );
     for (Post post in posts) {
-      post.img = await post.getPresignedS3ImgUrl();
-      post.user?.img = await post.user?.getPresignedS3ImgUrl();
+      post.headerImg = await post.getPresignedS3ImgUrl(post.headerImg);
+      post.contentImg = await post.getPresignedS3ImgUrl(post.contentImg);
+      post.user?.img = await post.user?.getPresignedS3ImgUrl(post.user?.img);
     }
     return posts;
   }

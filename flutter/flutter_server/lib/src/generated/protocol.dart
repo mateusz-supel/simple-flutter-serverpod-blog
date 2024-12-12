@@ -67,7 +67,13 @@ class Protocol extends _i1.SerializationManagerServer {
           dartType: 'DateTime',
         ),
         _i2.ColumnDefinition(
-          name: 'img',
+          name: 'headerImg',
+          columnType: _i2.ColumnType.text,
+          isNullable: true,
+          dartType: 'String?',
+        ),
+        _i2.ColumnDefinition(
+          name: 'contentImg',
           columnType: _i2.ColumnType.text,
           isNullable: true,
           dartType: 'String?',

@@ -17,7 +17,7 @@ class UserEndpoint extends Endpoint {
 
   Future<User?> getUserById(Session session, int id) async {
     final User? user = await User.db.findById(session, id);
-    user?.img = await user.getPresignedS3ImgUrl();
+    user?.img = await user.getPresignedS3ImgUrl(user.img);
     return user;
   }
 
@@ -27,7 +27,7 @@ class UserEndpoint extends Endpoint {
       orderBy: (t) => t.id,
     );
     for (User user in users) {
-      user.img = await user.getPresignedS3ImgUrl();
+      user.img = await user.getPresignedS3ImgUrl(user.img);
     }
     return users;
   }
