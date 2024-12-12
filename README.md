@@ -18,4 +18,4 @@ https://docs.docker.com/desktop/setup/install/
 dart pub global activate serverpod_cli
 ```
 3. Run serverpod - [flutter_server/README.md](flutter/flutter_server/README.md)
-3. Run frontend - [flutter_flutter/README.md](flutter/flutter_flutter/README.md)sds
+3. Run frontend - [flutter_flutter/README.md](flutter/flutter_flutter/README.md)sds@Lu
