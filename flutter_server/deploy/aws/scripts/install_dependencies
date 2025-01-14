@@ -1,5 +1,5 @@
 #!/bin/bash
-DART_VERSION=3.5.1
+DART_VERSION=3.6.0
 
 ## Uncomment the following code if you have already generated the project with the older version of serverpod cli
 ## What this code do is to remove our previous way of setting dart version in the launch template

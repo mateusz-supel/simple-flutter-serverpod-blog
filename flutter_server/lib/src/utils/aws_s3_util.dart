@@ -11,9 +11,9 @@ class AwsS3Util {
     // Take aws credentials from server passwords.yml
     String awsS3Bucket = Serverpod.instance.getPassword('awsS3Bucket')!;
     String awsRegion = Serverpod.instance.getPassword('awsRegion')!;
-    String awsAccessKeyId = Serverpod.instance.getPassword('awsAccessKeyId')!;
+    String awsAccessKeyId = Serverpod.instance.getPassword('preSignAwsKey')!;
     String awsSecretAccessKey =
-        Serverpod.instance.getPassword('awsSecretAccessKey')!;
+        Serverpod.instance.getPassword('preSignAwsSecretKey')!;
 
     final AWSCredentials awsCredentials =
         AWSCredentials(awsAccessKeyId, awsSecretAccessKey);
