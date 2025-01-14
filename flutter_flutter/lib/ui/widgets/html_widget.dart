@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
+import 'package:url_launcher/link.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class HtmlWidget extends StatelessWidget {
   const HtmlWidget(
@@ -30,6 +32,18 @@ class HtmlWidget extends StatelessWidget {
             fontWeight: FontWeight.w400,
             fontSize: FontSize(16)),
       },
+      onLinkTap: (url, attributes, element) => {
+        if (url != null) {_launchInBrowser(Uri.parse(url))}
+      },
     );
+  }
+
+  Future<void> _launchInBrowser(Uri url) async {
+    if (!await launchUrl(
+      url,
+      mode: LaunchMode.externalApplication,
+    )) {
+      throw Exception('Could not launch $url');
+    }
   }
 }
