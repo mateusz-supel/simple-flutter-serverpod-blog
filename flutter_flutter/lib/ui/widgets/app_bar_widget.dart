@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_flutter/consts/app_sizes.dart';
 import 'package:flutter_flutter/consts/config.dart';
-import 'package:flutter_flutter/ui/widgets/github_button.dart';
 import 'package:flutter_flutter/ui/widgets/social_media_button.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
