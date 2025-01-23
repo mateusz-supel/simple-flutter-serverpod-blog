@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_flutter/consts/app_sizes.dart';
+import 'package:flutter_flutter/consts/config.dart';
 import 'package:flutter_flutter/ui/widgets/github_button.dart';
+import 'package:flutter_flutter/ui/widgets/social_media_button.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class AppBarWidget extends StatelessWidget {
   const AppBarWidget({super.key});
@@ -18,11 +21,21 @@ class AppBarWidget extends StatelessWidget {
       pinned: false,
       backgroundColor: Theme.of(context).colorScheme.onSurface,
       centerTitle: false,
-      actions: [
+      actions: const [
+        SocialMediaButton(
+          icon: FontAwesomeIcons.github,
+          color: Colors.white,
+          url: Config.githubUrl,
+        ),
+        SizedBox(width: AppSizes.minSpacing),
         Padding(
           padding:
-              const EdgeInsets.symmetric(horizontal: AppSizes.defaultPadding),
-          child: GithubButton(),
+              EdgeInsets.only(right: AppSizes.defaultPadding),
+          child: SocialMediaButton(
+            icon: FontAwesomeIcons.linkedin,
+            color: Colors.blue,
+            url: Config.linkedInUrl,
+          ),
         ),
       ],
       flexibleSpace: FlexibleSpaceBar(
@@ -33,8 +46,8 @@ class AppBarWidget extends StatelessWidget {
             child: SelectableText.rich(
               TextSpan(
                 children: [
-                  TextSpan(text: "MATEUSZ", style: textStyle),
-                  TextSpan(text: " SUPEŁ", style: textStyle),
+                  TextSpan(text: Config.blogName1, style: textStyle),
+                  TextSpan(text: Config.blogName2, style: textStyle),
                 ],
               ),
             ),
