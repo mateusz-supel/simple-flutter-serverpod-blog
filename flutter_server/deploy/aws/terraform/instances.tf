@@ -16,49 +16,43 @@ data "aws_ami" "amazon-linux" {
   }
 }
 
-resource "aws_launch_configuration" "serverpod" {
-  name_prefix = "${var.project_name}-"
-  image_id    = var.instance_ami
-  #   image_id = data.aws_ami.amazon-linux.id
+resource "aws_launch_template" "serverpod" {
+  name_prefix   = "${var.project_name}-"
+  image_id      = var.instance_ami
   instance_type = var.instance_type
-  user_data     = templatefile("init-script.sh", { runmode = "production" })
+  user_data = base64encode(templatefile("init-script.sh", { runmode = "production" }))
 
-  security_groups = [
-    aws_security_group.serverpod.id,
-    aws_security_group.ssh.id
-  ]
+  iam_instance_profile {
+    name = aws_iam_instance_profile.codedeploy_profile.name
+  }
 
-  iam_instance_profile = aws_iam_instance_profile.codedeploy_profile.name
+  network_interfaces {
+    security_groups = [
+      aws_security_group.serverpod.id,
+      aws_security_group.ssh.id
+    ]
+  }
 
-  lifecycle {
-    create_before_destroy = true
+  tag_specifications {
+    resource_type = "instance"
+
+    tags = {
+      Name = "${var.project_name}-serverpod"
+    }
   }
 }
 
 resource "aws_autoscaling_group" "serverpod" {
-  min_size             = var.autoscaling_min_size
-  max_size             = var.autoscaling_max_size
-  desired_capacity     = var.autoscaling_desired_capacity
-  launch_configuration = aws_launch_configuration.serverpod.name
-  vpc_zone_identifier  = module.vpc.public_subnets
+  min_size         = var.autoscaling_min_size
+  max_size         = var.autoscaling_max_size
+  desired_capacity = var.autoscaling_desired_capacity
 
-  target_group_arns = [
-    aws_lb_target_group.api.arn,
-    aws_lb_target_group.insights.arn,
-    aws_lb_target_group.web.arn
-  ]
-
-  tag {
-    key                 = "Name"
-    value               = "${var.project_name}-serverpod"
-    propagate_at_launch = true
+  launch_template {
+    id      = aws_launch_template.serverpod.id
+    version = "$Latest"
   }
 
-  tag {
-    key                 = "CodeDeploy"
-    value               = var.project_name
-    propagate_at_launch = true
-  }
+  vpc_zone_identifier = module.vpc.public_subnets
 }
 
 resource "aws_security_group" "serverpod" {
