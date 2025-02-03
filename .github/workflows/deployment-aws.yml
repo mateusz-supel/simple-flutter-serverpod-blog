@@ -57,7 +57,7 @@ jobs:
         id: deploy
         env:
           PROJECT_NAME: flutter_server
-          AWS_NAME: msupel-blog
+          AWS_NAME: blog
           DEPLOYMENT_BUCKET: flutter-deployment-2808656
           TARGET: ${{ github.event.inputs.target }}
         run: |
