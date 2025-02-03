@@ -56,8 +56,8 @@ jobs:
       - name: Create CodeDeploy Deployment
         id: deploy
         env:
-          PROJECT_NAME: flutter
-          AWS_NAME: flutter
+          PROJECT_NAME: flutter_server
+          AWS_NAME: msuple-blog
           DEPLOYMENT_BUCKET: flutter-deployment-2808656
           TARGET: ${{ github.event.inputs.target }}
         run: |
