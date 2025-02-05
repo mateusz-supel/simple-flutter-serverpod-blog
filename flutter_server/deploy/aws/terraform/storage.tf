@@ -9,6 +9,7 @@ resource "aws_s3_bucket" "public_storage" {
 }
 
 resource "aws_s3_bucket_acl" "public_storage" {
+  depends_on = [aws_s3_bucket_ownership_controls.deployment]
   bucket = aws_s3_bucket.public_storage.id
   acl    = "private"
 }

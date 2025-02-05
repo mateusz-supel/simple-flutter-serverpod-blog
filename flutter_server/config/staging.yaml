@@ -34,7 +34,7 @@ webServer:
 # If you are connecting on a public IP (e.g. on AWS or Google Cloud Run), you
 # connect on the public IP of the database e.g. database-staging.examplepod.com.
 database:
-  host: database.private-staging.msupel.com
+  host: database.staging.msupel.com
   port: 5432
   name: serverpod
   user: postgres
@@ -46,5 +46,5 @@ database:
 # connect on the public IP of the database e.g. redis-staging.examplepod.com.
 redis:
   enabled: false
-  host: redis.private-staging.msupel.com
+  host: redis.staging.msupel.com
   port: 6379

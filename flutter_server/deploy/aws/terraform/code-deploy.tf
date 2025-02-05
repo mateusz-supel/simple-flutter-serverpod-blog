@@ -79,9 +79,15 @@ resource "aws_codedeploy_deployment_group" "serverpod" {
 resource "aws_s3_bucket" "deployment" {
   bucket        = var.deployment_bucket_name
   force_destroy = true
-
   tags = {
     Name = "${var.project_name} deployment"
+  }
+}
+
+resource "aws_s3_bucket_ownership_controls" "deployment" {
+  bucket = aws_s3_bucket.deployment.id
+  rule {
+    object_ownership = "ObjectWriter"
   }
 }
 
@@ -89,11 +95,4 @@ resource "aws_s3_bucket_acl" "deployment" {
   depends_on = [aws_s3_bucket_ownership_controls.deployment]
   bucket = aws_s3_bucket.deployment.id
   acl    = "private"
-}
-
-resource "aws_s3_bucket_ownership_controls" "deployment" {
-  bucket = aws_s3_bucket.deployment.id
-  rule {
-    object_ownership = "BucketOwnerPreferred"
-  }
 }
