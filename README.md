@@ -3,7 +3,7 @@
 This is a cross platform blog application, written in dart flutter with a serverpod as a backend service.
 
 # Motivation
-Learning software development, experimenting with technologies, showcase of my personal work.
+Learning software development, experimenting with technologies.
 
 # Features
 - Serverpod backend
