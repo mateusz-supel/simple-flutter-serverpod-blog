@@ -30,8 +30,8 @@ enable_redis = false
 # us-east-1 region.
 hosted_zone_id             = "Z0942665B193FOX36EOO"
 top_domain                 = "msupel.com"
-certificate_arn            = "arn:aws:acm:eu-central-1:396866020863:certificate/71e885d7-a254-44a6-9e7e-f7a28f5601dc"
-cloudfront_certificate_arn = "arn:aws:acm:us-east-1:396866020863:certificate/ecfd7ebd-933d-40de-87e8-24fb260154f5"
+certificate_arn            = "arn:aws:acm:eu-central-1:396866020863:certificate/a047aea7-0be5-40bf-baf3-3a746f504954"
+cloudfront_certificate_arn = "arn:aws:acm:us-east-1:396866020863:certificate/c77c8b16-409b-402f-aca9-08435841e98e"
 
 # Subdomains for different services. Default values are recommended, but you
 # may want to change the subdomain_web to www if you are using the top domain
