@@ -40,7 +40,7 @@ subdomain_database = "database"
 subdomain_redis    = "redis"
 subdomain_api      = "api"
 subdomain_insights = "insights"
-subdomain_web      = "app"
+subdomain_web      = "www"
 subdomain_storage  = "storage"
 
 subdomain_database_staging = "database-staging"
@@ -51,7 +51,7 @@ subdomain_web_staging      = "app-staging"
 subdomain_storage_staging  = "storage-staging"
 
 # Set to true if you want to use the top domain for the web server.
-use_top_domain_for_web = false
+use_top_domain_for_web = true
 
 # The definition of the server instances to deploy. Note that if you change the
 # region, you will have to change the AMI as they are bound to specific regions.
