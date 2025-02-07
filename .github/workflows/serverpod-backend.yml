@@ -29,6 +29,10 @@ jobs:
         run: |
           docker compose up --build --detach
 
+      - name: Create passwords file
+        working-directory: flutter_server
+        run: echo "${{ secrets.SERVERPOD_PASSWORDS }}" > config/passwords.yaml
+
       - name: Apply Migrations
         working-directory: flutter_server
         run: |
