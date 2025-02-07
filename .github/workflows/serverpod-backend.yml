@@ -19,20 +19,21 @@ jobs:
         with:
           sdk: stable
 
-      - name: Set Working Directory
-        run: cd flutter_server
-
       - name: Install Serverpod Dependencies
+        working-directory: flutter_server
         run: |
           dart pub get
 
       - name: Start Serverpod Backend with Docker
+        working-directory: flutter_server
         run: |
           docker compose up --build --detach
 
       - name: Apply Migrations
+        working-directory: flutter_server
         run: |
           dart bin/main.dart --apply-migrations
 
       - name: Verify Serverpod is Running
+        working-directory: flutter_server
         run: curl -f http://localhost:8080/health || exit 1
