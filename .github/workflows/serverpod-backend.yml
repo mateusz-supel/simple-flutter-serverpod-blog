@@ -1,0 +1,33 @@
+name: Serverpod Backend
+
+on:
+  workflow_dispatch:
+
+jobs:
+  start-backend:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Setup Dart
+        uses: dart-lang/setup-dart@v1
+        with:
+          sdk: stable
+
+      - name: Install Docker Compose
+        run: sudo apt-get install -y docker-compose
+
+      - name: Start Serverpod Backend with Docker
+        run: |
+          cd flutter_server
+          docker compose up --build --detach
+
+      - name: Apply Migrations
+        run: |
+          cd flutter_server
+          dart bin/main.dart --apply-migrations
+
+      - name: Verify Serverpod is Running
+        run: curl -f http://localhost:8080/health || exit 1
