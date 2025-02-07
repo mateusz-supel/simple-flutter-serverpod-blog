@@ -1,4 +1,4 @@
-name: Serverpod Backend
+name: Serverpod
 
 on:
   workflow_dispatch:
@@ -36,7 +36,7 @@ jobs:
       - name: Apply Migrations
         working-directory: flutter_server
         run: |
-          dart bin/main.dart --apply-migrations
+          dart bin/main.dart --apply-migrations > serverpod.log 2>&1 &
 
       - name: Verify Serverpod is Running
         working-directory: flutter_server
