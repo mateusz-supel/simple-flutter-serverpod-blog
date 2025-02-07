@@ -1,4 +1,4 @@
-name: Serverpod
+name: Test Local
 
 on:
   workflow_dispatch:
@@ -37,6 +37,7 @@ jobs:
         working-directory: flutter_server
         run: |
           dart bin/main.dart --apply-migrations > serverpod.log 2>&1 &
+          sleep 5  # Give it time to start
 
       - name: Verify Serverpod is Running
         working-directory: flutter_server
