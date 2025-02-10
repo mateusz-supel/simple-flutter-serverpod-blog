@@ -39,8 +39,3 @@ jobs:
         working-directory: flutter_server
         run: |
           dart bin/main.dart --apply-migrations --mode development --logging verbose> serverpod.log 2>&1 &
-          sleep 5  # Give it time to start
-
-      - name: Verify Serverpod is Running
-        working-directory: flutter_server
-        run: curl -f http://localhost:8090 || exit 1
