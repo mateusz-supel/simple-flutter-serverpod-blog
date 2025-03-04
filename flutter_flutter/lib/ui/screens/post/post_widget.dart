@@ -112,6 +112,7 @@ class _PostsListWidgetState extends State<PostsListWidget> {
     return ListView.builder(
       itemCount: _posts.length,
       shrinkWrap: true,
+      physics: NeverScrollableScrollPhysics(),
       itemBuilder: (BuildContext context, int index) {
         final Post postModel = _posts[index];
         return Card(

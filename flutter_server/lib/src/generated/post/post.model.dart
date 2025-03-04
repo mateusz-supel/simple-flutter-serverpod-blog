@@ -8,11 +8,9 @@
 // ignore_for_file: type_literal_in_constant_pattern
 // ignore_for_file: use_super_parameters
 
-// ignore_for_file: invalid_use_of_visible_for_testing_member
-
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod/serverpod.dart' as _i1;
-import '../protocol.dart' as _i2;
+import '../user.model.dart' as _i2;
 
 abstract class Post implements _i1.TableRow, _i1.ProtocolSerialization {
   Post._({
@@ -325,7 +323,7 @@ class PostRepository {
       orderDescending: orderDescending,
       limit: limit,
       offset: offset,
-      transaction: transaction ?? session.transaction,
+      transaction: transaction,
       include: include,
     );
   }
@@ -346,7 +344,7 @@ class PostRepository {
       orderByList: orderByList?.call(Post.t),
       orderDescending: orderDescending,
       offset: offset,
-      transaction: transaction ?? session.transaction,
+      transaction: transaction,
       include: include,
     );
   }
@@ -359,7 +357,7 @@ class PostRepository {
   }) async {
     return session.db.findById<Post>(
       id,
-      transaction: transaction ?? session.transaction,
+      transaction: transaction,
       include: include,
     );
   }
@@ -371,7 +369,7 @@ class PostRepository {
   }) async {
     return session.db.insert<Post>(
       rows,
-      transaction: transaction ?? session.transaction,
+      transaction: transaction,
     );
   }
 
@@ -382,7 +380,7 @@ class PostRepository {
   }) async {
     return session.db.insertRow<Post>(
       row,
-      transaction: transaction ?? session.transaction,
+      transaction: transaction,
     );
   }
 
@@ -395,7 +393,7 @@ class PostRepository {
     return session.db.update<Post>(
       rows,
       columns: columns?.call(Post.t),
-      transaction: transaction ?? session.transaction,
+      transaction: transaction,
     );
   }
 
@@ -408,7 +406,7 @@ class PostRepository {
     return session.db.updateRow<Post>(
       row,
       columns: columns?.call(Post.t),
-      transaction: transaction ?? session.transaction,
+      transaction: transaction,
     );
   }
 
@@ -419,7 +417,7 @@ class PostRepository {
   }) async {
     return session.db.delete<Post>(
       rows,
-      transaction: transaction ?? session.transaction,
+      transaction: transaction,
     );
   }
 
@@ -430,7 +428,7 @@ class PostRepository {
   }) async {
     return session.db.deleteRow<Post>(
       row,
-      transaction: transaction ?? session.transaction,
+      transaction: transaction,
     );
   }
 
@@ -441,7 +439,7 @@ class PostRepository {
   }) async {
     return session.db.deleteWhere<Post>(
       where: where(Post.t),
-      transaction: transaction ?? session.transaction,
+      transaction: transaction,
     );
   }
 
@@ -454,7 +452,7 @@ class PostRepository {
     return session.db.count<Post>(
       where: where?.call(Post.t),
       limit: limit,
-      transaction: transaction ?? session.transaction,
+      transaction: transaction,
     );
   }
 }
@@ -479,7 +477,7 @@ class PostAttachRowRepository {
     await session.db.updateRow<Post>(
       $post,
       columns: [Post.t.userId],
-      transaction: transaction ?? session.transaction,
+      transaction: transaction,
     );
   }
 }

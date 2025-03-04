@@ -3,6 +3,7 @@ import 'package:flutter_flutter/consts/app_sizes.dart';
 import 'package:flutter_flutter/consts/config.dart';
 import 'package:flutter_flutter/ui/widgets/social_media_button.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:go_router/go_router.dart';
 
 class AppBarWidget extends StatelessWidget {
   const AppBarWidget({super.key});
@@ -19,8 +20,17 @@ class AppBarWidget extends StatelessWidget {
       floating: false,
       pinned: false,
       backgroundColor: Theme.of(context).colorScheme.onSurface,
-      centerTitle: false,
-      actions: const [
+        centerTitle: true,
+        actions: [
+          TextButton(
+            child: Text("PLAYGROUND",
+                style: Theme.of(context)
+                    .textTheme
+                    .titleSmall!
+                    .apply(color: Colors.white)),
+            onPressed: () => {context.go('/playground')},
+          ),
+          SizedBox(width: AppSizes.midSpacing),
         SocialMediaButton(
           icon: FontAwesomeIcons.github,
           color: Colors.white,
@@ -28,8 +38,7 @@ class AppBarWidget extends StatelessWidget {
         ),
         SizedBox(width: AppSizes.minSpacing),
         Padding(
-          padding:
-              EdgeInsets.only(right: AppSizes.defaultPadding),
+            padding: EdgeInsets.only(right: AppSizes.defaultPadding),
           child: SocialMediaButton(
             icon: FontAwesomeIcons.linkedin,
             color: Colors.blue,
@@ -42,17 +51,20 @@ class AppBarWidget extends StatelessWidget {
           padding: const EdgeInsets.all(AppSizes.defaultPadding),
           child: Align(
             alignment: Alignment.topLeft,
-            child: SelectableText.rich(
+              child: TextButton(
+                  onPressed: () => {context.go('/blog')},
+                  child: RichText(
+                    text: 
               TextSpan(
                 children: [
                   TextSpan(text: Config.blogName1, style: textStyle),
                   TextSpan(text: Config.blogName2, style: textStyle),
                 ],
               ),
+                  ) 
+          ),
             ),
           ),
-        ),
-      ),
-    );
+        ));
   }
 }

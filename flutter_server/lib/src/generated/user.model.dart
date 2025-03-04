@@ -8,8 +8,6 @@
 // ignore_for_file: type_literal_in_constant_pattern
 // ignore_for_file: use_super_parameters
 
-// ignore_for_file: invalid_use_of_visible_for_testing_member
-
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod/serverpod.dart' as _i1;
 
@@ -202,7 +200,7 @@ class UserRepository {
       orderDescending: orderDescending,
       limit: limit,
       offset: offset,
-      transaction: transaction ?? session.transaction,
+      transaction: transaction,
     );
   }
 
@@ -221,7 +219,7 @@ class UserRepository {
       orderByList: orderByList?.call(User.t),
       orderDescending: orderDescending,
       offset: offset,
-      transaction: transaction ?? session.transaction,
+      transaction: transaction,
     );
   }
 
@@ -232,7 +230,7 @@ class UserRepository {
   }) async {
     return session.db.findById<User>(
       id,
-      transaction: transaction ?? session.transaction,
+      transaction: transaction,
     );
   }
 
@@ -243,7 +241,7 @@ class UserRepository {
   }) async {
     return session.db.insert<User>(
       rows,
-      transaction: transaction ?? session.transaction,
+      transaction: transaction,
     );
   }
 
@@ -254,7 +252,7 @@ class UserRepository {
   }) async {
     return session.db.insertRow<User>(
       row,
-      transaction: transaction ?? session.transaction,
+      transaction: transaction,
     );
   }
 
@@ -267,7 +265,7 @@ class UserRepository {
     return session.db.update<User>(
       rows,
       columns: columns?.call(User.t),
-      transaction: transaction ?? session.transaction,
+      transaction: transaction,
     );
   }
 
@@ -280,7 +278,7 @@ class UserRepository {
     return session.db.updateRow<User>(
       row,
       columns: columns?.call(User.t),
-      transaction: transaction ?? session.transaction,
+      transaction: transaction,
     );
   }
 
@@ -291,7 +289,7 @@ class UserRepository {
   }) async {
     return session.db.delete<User>(
       rows,
-      transaction: transaction ?? session.transaction,
+      transaction: transaction,
     );
   }
 
@@ -302,7 +300,7 @@ class UserRepository {
   }) async {
     return session.db.deleteRow<User>(
       row,
-      transaction: transaction ?? session.transaction,
+      transaction: transaction,
     );
   }
 
@@ -313,7 +311,7 @@ class UserRepository {
   }) async {
     return session.db.deleteWhere<User>(
       where: where(User.t),
-      transaction: transaction ?? session.transaction,
+      transaction: transaction,
     );
   }
 
@@ -326,7 +324,7 @@ class UserRepository {
     return session.db.count<User>(
       where: where?.call(User.t),
       limit: limit,
-      transaction: transaction ?? session.transaction,
+      transaction: transaction,
     );
   }
 }
