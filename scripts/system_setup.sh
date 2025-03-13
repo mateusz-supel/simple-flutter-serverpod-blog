@@ -15,9 +15,8 @@ fi
 brew install git cocoapods
 
 # Install FVM (Flutter Version Manager) using the official tap
-brew tap leoafarias/fvm
-brew install fvm
-fvm use 3.29.0
+dart pub global activate fvm
+fvm install
 
 # Add FLUTTER_ROOT path to the zshrc file. This is required for the scripts that deploy for iOS.
 if ! grep -q 'export FLUTTER_ROOT=' ~/.zshrc; then
