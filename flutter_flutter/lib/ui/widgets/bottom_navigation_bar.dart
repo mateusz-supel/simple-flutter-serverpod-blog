@@ -5,6 +5,7 @@ class CustomBottomNavigationBar extends StatelessWidget {
   final ValueChanged<int> onTap;
 
   const CustomBottomNavigationBar({
+    super.key, 
     required this.currentIndex,
     required this.onTap,
   });

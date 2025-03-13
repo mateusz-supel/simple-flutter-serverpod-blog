@@ -10,6 +10,8 @@
 //
 // import 'package:PROJECTNAME_flutter/main.dart';
 
+import 'package:test/test.dart';
+
 void main() {
-  // Add your app tests here
+  test('Empty test', () {});
 }

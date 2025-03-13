@@ -1,0 +1,6 @@
+appId: com.example.flutterFlutter
+clearState: true
+language: en
+
+flows:
+  - flows/playground/*

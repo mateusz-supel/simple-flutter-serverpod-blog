@@ -10,6 +10,6 @@ class PlaygroundScreen extends StatefulWidget {
 class PlaygroundScreenState extends State<PlaygroundScreen> {
   @override
   Widget build(BuildContext context) {
-    return Text("Playground");
+    return SelectableText("Welcome to playground!");
   }
 }

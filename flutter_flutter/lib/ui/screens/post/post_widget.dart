@@ -16,7 +16,7 @@ class PostsListWidget extends StatefulWidget {
 
 class _PostsListWidgetState extends State<PostsListWidget> {
   List<Post> _posts = [];
-  Exception? _connectionException;
+  //Exception? _connectionException;
   DateFormat format = DateFormat("MMM dd");
 
   @override
@@ -31,7 +31,7 @@ class _PostsListWidgetState extends State<PostsListWidget> {
   void _connectionFailed(dynamic exception) {
     setState(() {
       _posts = [];
-      _connectionException = exception;
+      //_connectionException = exception;
     });
   }
 

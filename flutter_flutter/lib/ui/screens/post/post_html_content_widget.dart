@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_client/flutter_client.dart';
 import 'package:flutter_flutter/main.dart';
 import 'package:flutter_flutter/ui/widgets/html_widget.dart';
-import 'package:flutter_html/flutter_html.dart';
 
 class PostHtmlContentWidget extends StatefulWidget {
   const PostHtmlContentWidget({super.key, required this.id});
@@ -15,7 +14,7 @@ class PostHtmlContentWidget extends StatefulWidget {
 
 class _PostHtmlContentWidgetState extends State<PostHtmlContentWidget> {
   Post? _post;
-  Exception? _connectionException;
+  //Exception? _connectionException;
 
   @override
   void initState() {
@@ -26,7 +25,7 @@ class _PostHtmlContentWidgetState extends State<PostHtmlContentWidget> {
   void _connectionFailed(dynamic exception) {
     setState(() {
       _post = null;
-      _connectionException = exception;
+      //_connectionException = exception;
     });
   }
 

@@ -1,4 +1,4 @@
-name: Test Local
+name: Run Serverpod
 
 on:
   workflow_dispatch:

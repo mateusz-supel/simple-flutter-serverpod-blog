@@ -6,6 +6,24 @@
 			"type": "shell",
 			"command": "sh scripts/run_serverpod.sh",
 			"problemMatcher": []
+		},
+		{
+			"label": "Build iOS simulator app",
+			"type": "shell",
+			"command": "cd flutter_flutter && flutter build ios --debug --simulator",
+			"problemMatcher": []
+		},
+		{
+			"label": "Build Android Release build",
+			"type": "shell",
+			"command": "cd flutter_flutter && flutter build apk",
+			"problemMatcher": []
+		},
+		{
+			"label": "Build Android Debug build",
+			"type": "shell",
+			"command": "cd flutter_flutter && flutter build apk --debug",
+			"problemMatcher": []
 		}
 	]
 }

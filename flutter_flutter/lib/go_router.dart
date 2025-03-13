@@ -1,9 +1,6 @@
-import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_flutter/ui/screens/home/home_screen.dart';
 import 'package:flutter_flutter/ui/screens/main_screen.dart';
 import 'package:flutter_flutter/ui/screens/playground/playground_screen.dart';
-import 'package:flutter_flutter/ui/widgets/app_bar_widget.dart';
 import 'package:go_router/go_router.dart';
 
 final GoRouter router = GoRouter(

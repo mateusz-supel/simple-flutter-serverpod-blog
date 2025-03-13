@@ -1,0 +1,5 @@
+appId: com.example.flutterFlutter
+---
+- launchApp
+- tapOn: "Playground\nTab 2 of 2"
+- assertVisible: "Welcome to playground!"

@@ -11,8 +11,8 @@ class SocialMediaButton extends StatelessWidget {
     required this.icon,
     required this.color,
     required this.url,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {

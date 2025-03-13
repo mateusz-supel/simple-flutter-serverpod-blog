@@ -1,0 +1,41 @@
+name: Run Maestro Tests
+
+on:
+  workflow_dispatch:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  maestro-ios-test:
+    runs-on: macos-latest
+    strategy:
+      matrix:
+        device: ["iPhone 15", "iPhone 15 Pro"]
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install Maestro
+        run: curl -Ls https://get.maestro.mobile.dev | bash
+
+      - name: Start iOS Simulator - ${{ matrix.device }}
+        run: |
+          xcrun simctl boot "${{ matrix.device }}"
+          sleep 10 # Wait for boot
+
+      - name: Build iOS App
+        run: |
+          xcodebuild -scheme YourApp \
+                     -sdk iphonesimulator \
+                     -configuration Debug \
+                     -derivedDataPath build
+          APP_PATH=$(find build -name "*.app" | head -n 1)
+          echo "APP_PATH=$APP_PATH" >> $GITHUB_ENV
+
+      - name: Install app on simulator
+        run: xcrun simctl install "${{ matrix.device }}" "$APP_PATH"
+
+      - name: Run Maestro Tests in Parallel
+        run: |
+          ~/.maestro/bin/maestro test .maestro --device "${{ matrix.device }}" --shard 2 --shard-index ${{ strategy.job-index }}
